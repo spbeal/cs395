@@ -19,6 +19,7 @@ void disk2(char src_tower, char aux_tower, char dest_tower);
 void disk3(char src_tower, char aux_tower, char dest_tower);
 void patternACB(char src_tower, char aux_tower, char dest_tower);
 void Cyclic(int disks, char src_tower, char aux_tower, char dest_tower);
+void CyclicAgain(int disks, char src_tower, char aux_tower, char dest_tower);
 
 int main (int argc, char *argv[])
 {
@@ -32,33 +33,56 @@ int main (int argc, char *argv[])
    int disks = atoi(argv[1]);
    
    // a c b
-   Cyclic(disks, 'A', 'B', 'C');
+   //Cyclic(disks, 'A', 'B', 'C');
+   //printf("\n\n\n\n\n\n");
+   CyclicAgain(disks, 'A', 'C', 'B');
    //calculateRecCyclic(disks, 'A', 'B', 'C', false);
    // printf("Move %s TO %s", curr, next);
 
 }
 
-// from to with
+// 
 void Cyclic(int disks, char src_tower, char aux_tower, char dest_tower) 
 {
-   if (disks == 0) {    
-      // disk1(src_tower, aux_tower, dest_tower);
-      //printf("Move %c TO %c\n", 'a', 'b');
-      //printf("Move %c TO %c\n", 'b', 'c');
+   if (disks < 1) {    
       return;
    }
+
    Cyclic(disks-1, src_tower, aux_tower, dest_tower);
+   printf("Move %c TO %c\n", src_tower, aux_tower);
+   if (disks > 1)
+   {
+      Cyclic(disks-2, dest_tower, aux_tower, src_tower);
+      printf("Move %c to %c\n", dest_tower, src_tower);
+      Cyclic(disks-2, aux_tower, src_tower, dest_tower);
+   }
+   printf("Move %c TO %c\n", aux_tower, dest_tower);
+   Cyclic(disks-1, src_tower, aux_tower, dest_tower);
+   return;
+}
+
+void CyclicAgain(int disks, char src_tower, char dest_tower, char aux_tower) 
+{
+   if (disks < 1) {    
+      return;
+   }
+   // a c b
+   CyclicAgain(disks-1, src_tower, dest_tower, aux_tower);
+   // a b
    printf("Move %c TO %c\n", src_tower, aux_tower);
 
 // missing c to a and b to c at end middle for 3 disks
    if (disks > 1)
    {
+      // c b a, c a, b a c
       Cyclic(disks-2, dest_tower, aux_tower, src_tower);
-      printf("Move %c to %c\n", aux_tower, src_tower);
+      printf("Move %c to %c\n", dest_tower, src_tower);
       Cyclic(disks-2, aux_tower, src_tower, dest_tower);
    }
+   // c b
    printf("Move %c TO %c\n", aux_tower, dest_tower);
-   Cyclic(disks-1, src_tower, aux_tower, dest_tower);
+   // a c b 
+   CyclicAgain(disks-1, src_tower, dest_tower, aux_tower);
 }
 
 // psuedocode
