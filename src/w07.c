@@ -48,30 +48,48 @@ int main (int argc, char *argv[])
 
 void Cyclic(int disks, char src_tower, char aux_tower, char dest_tower) {
    if (disks == 0) return;
-   if (disks == 1)
-   {
-      disk1(src_tower, aux_tower, dest_tower);
-      return;
-   }
-   if (disks == 2)
-   {
-      disk2(src_tower, aux_tower, dest_tower);
-      return;
-   }
-   if (disks == 3)
-   {
-      disk3(src_tower, aux_tower, dest_tower);
-      return;
-   }
+   // if (disks == 1)
+   // {
+   //    disk1(src_tower, aux_tower, dest_tower);
+   //    return;
+   // }
+   // if (disks == 2)
+   // {
+   //    disk2(src_tower, aux_tower, dest_tower);
+   //    return;
+   // }
+   // if (disks == 3)
+   // {
+   //    disk3(src_tower, aux_tower, dest_tower);
+   //    return;
+   // }
+      // a to b (3)
+      // c to a (1)
 
+      // a to b (1)
+      // c to a (2)
+      // b to c (3)
+
+      // c to a (1)
+      // b to c (3)
 
    Cyclic(disks-1, src_tower, aux_tower, dest_tower);
    printf("Move %c TO %c\n", src_tower, aux_tower);
    if (disks > 1)
    {
+      // c to a
+      if (disks > 2) {
+         printf("Move %c to %c\n", dest_tower, src_tower);
+      }
+      
       Cyclic(disks-2, src_tower, aux_tower, dest_tower);
       printf("Move %c to %c\n", dest_tower, src_tower);
       Cyclic(disks-2, aux_tower, dest_tower, src_tower);
+      
+      if (disks > 2) {
+         printf("Move %c to %c\n", dest_tower, src_tower);
+      }
+      // c to a
    }
    printf("Move %c TO %c\n", aux_tower, dest_tower);
    Cyclic(disks-1, src_tower, aux_tower, dest_tower);
