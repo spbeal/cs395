@@ -33,9 +33,9 @@ int main (int argc, char *argv[])
    int disks = atoi(argv[1]);
    
    // a c b
-   //Cyclic(disks, 'A', 'B', 'C');
+   Cyclic(disks, 'A', 'B', 'C');
    //printf("\n\n\n\n\n\n");
-   CyclicAgain(disks, 'A', 'C', 'B');
+   //CyclicAgain(disks, 'A', 'C', 'B');
    //calculateRecCyclic(disks, 'A', 'B', 'C', false);
    // printf("Move %s TO %s", curr, next);
 
@@ -44,17 +44,21 @@ int main (int argc, char *argv[])
 // 
 void Cyclic(int disks, char src_tower, char aux_tower, char dest_tower) 
 {
-   if (disks < 1) {    
+   if (disks < 1)
+   {
       return;
+   }
+   if (disks == 1) {    
+      //disk1(src_tower, aux_tower, dest_tower);
    }
 
    Cyclic(disks-1, src_tower, aux_tower, dest_tower);
    printf("Move %c TO %c\n", src_tower, aux_tower);
    if (disks > 1)
    {
-      Cyclic(disks-2, dest_tower, aux_tower, src_tower);
+      Cyclic(disks-2, src_tower, aux_tower, dest_tower);
       printf("Move %c to %c\n", dest_tower, src_tower);
-      Cyclic(disks-2, aux_tower, src_tower, dest_tower);
+      Cyclic(disks-2, aux_tower, dest_tower, src_tower);
    }
    printf("Move %c TO %c\n", aux_tower, dest_tower);
    Cyclic(disks-1, src_tower, aux_tower, dest_tower);
