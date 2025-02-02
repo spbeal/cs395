@@ -78,15 +78,15 @@ void Cyclic(int disks, char src_tower, char aux_tower, char dest_tower) {
    if (disks > 1)
    {
       // c to a
-      if (disks > 2) {
+      if (disks == 3) {
          printf("Move %c to %c\n", dest_tower, src_tower);
       }
       
       Cyclic(disks-2, src_tower, aux_tower, dest_tower);
       printf("Move %c to %c\n", dest_tower, src_tower);
       Cyclic(disks-2, aux_tower, dest_tower, src_tower);
-      
-      if (disks > 2) {
+
+      if (disks == 3) {
          printf("Move %c to %c\n", dest_tower, src_tower);
       }
       // c to a
