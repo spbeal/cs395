@@ -1,2 +1,1 @@
-# cs395
-CS395 assignments
+# CS395 Spring 2025
