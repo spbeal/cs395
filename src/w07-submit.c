@@ -13,7 +13,7 @@
 #include <math.h> // exp2(value);
 #include <stdbool.h>
 
-void CylicHanoi(int disks, char src_tower, char aux_tower, char dest_tower);
+void CylicHanoi(int disks, char src_tower, char dest_tower, char aux_tower);
 
 int main (int argc, char *argv[])
 {
@@ -25,11 +25,11 @@ int main (int argc, char *argv[])
 
    //int args = argc-1;
    int disks = atoi(argv[1]);
-   CylicHanoi(disks, 'A', 'B', 'C');
+   CylicHanoi(disks, 'A', 'C', 'B');
 
 }
 
-void CylicHanoi(int disks, char src_tower, char aux_tower, char dest_tower) 
+void CylicHanoi(int disks, char src_tower, char dest_tower, char aux_tower) 
 {
    if (disks < 1) {    
       return;
@@ -40,7 +40,7 @@ void CylicHanoi(int disks, char src_tower, char aux_tower, char dest_tower)
    printf("Move %c TO %c\n", src_tower, aux_tower);
 
 // missing c to a and b to c at end middle for 3 disks
-   if (n > 1)
+   if (disks > 1)
    {
       // c b a, c a, b a c
       CylicHanoi(disks-2,  dest_tower, aux_tower, src_tower);
