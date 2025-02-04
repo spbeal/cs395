@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int * selection_sort(int n, int * arr);
+void selection_sort(int n, int * arr);
 void printArray(int n, int * arr);
 
 int main (int argc, char *argv[])
@@ -28,11 +28,11 @@ int main (int argc, char *argv[])
       arr[i] = atoi(argv[i+1]);
       //printf("%d: %d", i, arr[i]);
    }
-   int * sorted_arr;
-   sorted_arr = selection_sort(n, arr);
+   //int * sorted_arr;
+   selection_sort(n, arr);
 }
 
-int * selection_sort(int n, int * arr)
+void selection_sort(int n, int * arr)
 {
    printArray(n, arr);
    int min = 0;
