@@ -46,7 +46,7 @@ void string_match(char * p, char * str)
       }
       if (j == len_p) printf(" %d", i);
    }
-   //printf("\n");
+   printf("\n");
    //return - 1;
 }
 
