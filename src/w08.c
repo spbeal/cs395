@@ -29,7 +29,7 @@ int main (int argc, char *argv[])
 
 void string_match(char * p, char * str)
 {
-   printf("Matches found at locations: ");
+   printf("Matches found at locations:");
    int len_p = 0;
    int len_str = 0;
    for (int i = 0; p[i] != '\0'; i++) len_p++;
@@ -44,7 +44,7 @@ void string_match(char * p, char * str)
       {
          j++;
       }
-      if (j == len_p) printf("%d ", i);
+      if (j == len_p) printf(" %d", i);
    }
    printf("\n");
    //return - 1;
