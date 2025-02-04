@@ -22,7 +22,7 @@ int main (int argc, char *argv[])
 
    char * pattern = argv[1];
    char * string = argv[2];
-   printf("Argc: %d Pattern: %s String: %s\n", argc, pattern, string);
+   //printf("Argc: %d Pattern: %s String: %s\n", argc, pattern, string);
 
    string_match(pattern, string);
 }
