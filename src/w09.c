@@ -50,7 +50,6 @@ void selection_sort(int n, int * arr)
       arr[min] = tmp;
       printArray(n, arr);
    }
-   return arr;
 }
 
 void printArray(int n, int * arr)
