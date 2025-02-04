@@ -15,7 +15,7 @@ void printArray(int n, int * arr);
 
 int main (int argc, char *argv[])
 {
-   if (argc < 3)
+   if (argc < 2)
    {
       printf("%s 1 2 3 4 5 6 7 8", argv[0]);
       exit(1);
@@ -26,7 +26,7 @@ int main (int argc, char *argv[])
    for (int i = 0; i < n; i++)
    {
       arr[i] = atoi(argv[i+1]);
-      printf("%d: %d", i, arr[i]);
+      //printf("%d: %d", i, arr[i]);
    }
    int * sorted_arr;
    sorted_arr = selection_sort(n, arr);
@@ -42,7 +42,7 @@ int * selection_sort(int n, int * arr)
       for (int j = i+1; j <= n-1; j++)
       {
          if (arr[j] < arr[min])
-            min = arr[j];
+            min = j;
       }
       // swap
       int tmp = arr[i];
@@ -59,6 +59,7 @@ void printArray(int n, int * arr)
    {
       printf("%d ", arr[i]);
    }
+   printf("\n");
 }
 
 /*
