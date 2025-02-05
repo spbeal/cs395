@@ -59,7 +59,7 @@ int main (int argc, char *argv[])
    }
    srand (time(NULL));
    // ------------------------------------------
-   int args = argc-1;
+   //int args = argc-1;
    int small = atoi(argv[1]);
    int arrSmall[small];
    int arrSmall2[small];
