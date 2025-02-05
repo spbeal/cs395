@@ -31,7 +31,7 @@ int main (int argc, char *argv[])
    }
 
    insertion_sort(n, arr);
-   printArray(n, arr);
+   //printArray(n, arr);
 }
 
 
