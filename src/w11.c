@@ -44,8 +44,8 @@ void swap(int * arr, int i, int j)
 
 void insertion_sort(int n, int * a)
 {
-   printArray(n, a);
-   for (int i = 1; i < n; i++)
+   //printArray(n, a);
+   for (int i = 0; i < n; i++)
    {
       int v = a[i];
       int j = i-1;
