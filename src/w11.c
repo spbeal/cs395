@@ -64,9 +64,9 @@ void printArray(int n, int * a)
    static int pivot = 0;
    for (int i = 0; i < n; i++)
    {
-      if (i == pivot && i != 0)
+      if (i == pivot)
       {
-         printf("| %d ", a[i]);
+         printf("%d | ", a[i]);
       }
       else
          printf("%d ", a[i]);
