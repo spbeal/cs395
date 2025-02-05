@@ -22,7 +22,6 @@ int main (int argc, char *argv[])
       exit(1);
    }
 
-   int n = argc-1;
    int x = atoi(argv[1]);
    int y = atoi(argv[2]);
    multiply(x,y);
