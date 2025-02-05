@@ -28,23 +28,11 @@ int main (int argc, char *argv[])
    for (int i = 0; i < n; i++)
    {
       arr[i] = atoi(argv[i+1]);
-      //printf("%d ", arr[i]);
    }
-   //printf("\n\n");
    int l = 0;
    int r = n-1;
    quick_sort(n, arr, l, r);
    printArray(n, arr, l, r);
-   // if (n < 2 && n > 0)
-   // {
-   //    //printf("[%d]", arr[0]);
-   // }
-   // else
-   // {
-   //    int l = 0;
-   //    int r = n-1;
-   //    quick_sort(n, arr, l, r);
-   // }
 }
 
 void swap(int * arr, int i, int j)
@@ -73,18 +61,15 @@ int HoarePartition(int * arr, int l, int r)
 
    while (i < j){
       do {
-         //printf("i: %d ", i);
          i++;
       } while (i<= r && arr[i] < p);
       do {
-         //printf("j: %d ", j);
          j--;
       } while (j >= l && arr[j] > p);
       if (i >= j) break;
       
       swap(arr, i, j);
    }
-   //swap(arr, i, j);
    swap(arr, l, j);
    return j;
 }
