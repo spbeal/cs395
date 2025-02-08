@@ -22,13 +22,13 @@ void printShiftTable(int table[])
    int i, start;
    for(start = MIN_WRITEABLE; start < MAX_ALPHABET; start+=TABLE_ROW_LENGTH)
    {
-      for(i = start; i < start+TABLE_ROW_LENGTH; i++)
+      for(i = start; i < start+TABLE_ROW_LENGTH && i < MAX_ALPHABET; i++)
       {
          printf("%c\t", i);
       }
       printf("\n");
 
-      for(i = start; i < start+TABLE_ROW_LENGTH; i++)
+      for(i = start; i < start+TABLE_ROW_LENGTH && i < MAX_ALPHABET; i++)
       {
          printf("%d\t", table[i]);
       }
@@ -44,13 +44,13 @@ int * ShiftTable(char * needle, int m){
    for (int i = 0; i < MAX_ALPHABET; i++) 
       Table[i] = m;
    for (int j = 0; j < m-1; j++) 
-      Table[needle[j]] = m - 1 - j;
+      Table[(unsigned char)needle[j]] = m - 1 - j;
       //Table[(unsigned char)needle[j]] = m - 1 - j;
    printShiftTable(Table);
    return Table;
 }
 
-int HorspoolMatching(char * needle, char * haystack, int m, int n)
+void HorspoolMatching(char * needle, char * haystack, int m, int n)
 {
    int * Table = ShiftTable(needle, m); //generate Table of shifts
    printf("%s\n", haystack);
@@ -77,7 +77,7 @@ int HorspoolMatching(char * needle, char * haystack, int m, int n)
       {
          printf("%*s%s\n", i-m+1, "", needle); 
       }
-      i = i + Table[haystack[i]];
+      i = i + Table[(unsigned char)haystack[i]];
       //i += Table[(unsigned char)haystack[i]];
    }
 
@@ -89,7 +89,7 @@ int HorspoolMatching(char * needle, char * haystack, int m, int n)
    printf("\n");
    free(Table);
    free(matches);
-   return matchNum;
+   //return matchNum;
    //return -1;
 }
 
@@ -108,7 +108,7 @@ int main (int argc, char *argv[])
    int n = strlen(string);
    //printf("Argc: %d Pattern: %s String: %s\n", argc, pattern, string);
 
-   int matchNum = HorspoolMatching(pattern, string, m, n);
+   HorspoolMatching(pattern, string, m, n);
 }
 
 /*
