@@ -9,8 +9,90 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void string_match(char * p, char * str);
+
+#define MAX_ALPHABET 128
+#define TABLE_ROW_LENGTH 16
+#define MIN_WRITEABLE 32
+//Print out the shift table starting at the first writable character (space)
+void printShiftTable(int table[])
+{
+   int i, start;
+   for(start = MIN_WRITEABLE; start < MAX_ALPHABET; start+=TABLE_ROW_LENGTH)
+   {
+      for(i = start; i < start+TABLE_ROW_LENGTH; i++)
+      {
+         printf("%c\t", i);
+      }
+      printf("\n");
+
+      for(i = start; i < start+TABLE_ROW_LENGTH; i++)
+      {
+         printf("%d\t", table[i]);
+      }
+      printf("\n\n");
+
+   }
+}
+
+int * ShiftTable(char * needle, int m){
+
+   //int * Table = new int[MAX_ALPHABET];
+   int * Table = malloc(MAX_ALPHABET * sizeof(int));
+   for (int i = 0; i < MAX_ALPHABET; i++) 
+      Table[i] = m;
+   for (int j = 0; j < m-1; j++) 
+      Table[needle[j]] = m - 1 - j;
+      //Table[(unsigned char)needle[j]] = m - 1 - j;
+   printShiftTable(Table);
+   return Table;
+}
+
+int HorspoolMatching(char * needle, char * haystack, int m, int n)
+{
+   int * Table = ShiftTable(needle, m); //generate Table of shifts
+   printf("%s\n", haystack);
+
+   int matchNum = 0;
+   int * matches = (int * )malloc(n*sizeof(int));
+   int i = m-1;
+   while (i<n)
+   {
+      int k = 0;
+      while (k < m && needle[m-1-k] == haystack[i-k])
+      {
+         k++;
+      }
+      if (k == m)
+      {
+         int match = i - m + 1;
+         //int match = k;
+         printf("%*s%s---found\n", i-m+1,"", needle);
+         matches[matchNum++] = match;
+         //return i - m + 1; // Except for your code, do not return. Start looking for the next occurance from here.
+      }
+      else
+      {
+         printf("%*s%s\n", i-m+1, "", needle); 
+      }
+      i = i + Table[haystack[i]];
+      //i += Table[(unsigned char)haystack[i]];
+   }
+
+   printf("Matches found at locations:");
+   for(i = 0; i < matchNum; i++)
+   {
+      printf(" %d", matches[i]);
+   }
+   printf("\n");
+   free(Table);
+   free(matches);
+   return matchNum;
+   //return -1;
+}
+
 
 int main (int argc, char *argv[])
 {
@@ -19,17 +101,14 @@ int main (int argc, char *argv[])
       printf("%s abc abcabcabcabcbcabcbabc\n", argv[0]);
       exit(1);
    }
-
+   
    char * pattern = argv[1];
    char * string = argv[2];
+   int m = strlen(pattern);
+   int n = strlen(string);
    //printf("Argc: %d Pattern: %s String: %s\n", argc, pattern, string);
 
-   string_match(pattern, string);
-}
-
-void string_match(char * p, char * str)
-{
-
+   int matchNum = HorspoolMatching(pattern, string, m, n);
 }
 
 /*
