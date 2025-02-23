@@ -1,3 +1,66 @@
+/*********************************************
+ * Id: beal6782
+ * 
+ * Permutations
+ * 
+ * Implement to find all permutations up to n
+ *********************************************/ 
+#include <stdio.h>
+#include <stdlib.h>
+// #include <bits/stdc++.h>
+
+
+void swap(int * arr, int i, int j)
+{
+   int tmp = arr[i];
+   arr[i] = arr[j];
+   arr[j] = tmp;
+}
+
+void printArr(int a[], int n)
+{
+    for (int i = 0; i < n; i++)
+        printf("%d", a[i]);
+    printf("\n");
+}
+
+// heap algorithm, O(n*n!)
+void permutations(int * a, int size, int n)
+{
+    if (size == 1) 
+    {
+        printArr(a, n);
+        return;
+    }
+
+    for (int i = 0; i < size; i++)
+    {
+        permutations(a, size-1, n);
+        if (size % 2 == 1) swap(a, 0, size-1); // odd swap start
+        else swap(a, i, size-1); //even swap curr index
+    }
+}
+
+
+int main (int argc, char *argv[])
+{
+   if (argc < 2)
+   {
+      printf("%s n", argv[0]);
+      exit(1);
+   }
+
+   const int n = atoi(argv[1]);
+   int * a;
+   a = (int *)malloc(n*sizeof(int));
+
+   for (int i = 0; i < n; i++)
+   {
+        a[i] = i+1;
+   }
+   //printf("end of a: %d \n", a[n-1]);
+   permutations(a, n, n);
+}
 
 /*
 Permutations.
