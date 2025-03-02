@@ -1,4 +1,31 @@
+/*********************************************
+ * Id: beal6782
+ * 
+ * Russian Peasant Multiplication
+ * 
+ * Implement an algorithm for russian peasant multiplcation
+ * n/2 * 2m for even
+ * n-1/2 * 2m + m for odd
+ *********************************************/ 
+#include <stdio.h>
+#include <stdlib.h>
+//#include <string.h>
 
+void multiply(int n, int m);
+void printMul(int n, int m);
+
+int main (int argc, char *argv[])
+{
+   if (argc < 3)
+   {
+      printf("%s 1 2 3 4 5 6 7 8", argv[0]);
+      exit(1);
+   }
+
+   int x = atoi(argv[1]);
+   int y = atoi(argv[2]);
+   multiply(x,y);
+}
 /*
 Boyer-Moore algorithm
 

@@ -27,12 +27,17 @@ void printArr(int a[], int n)
 // heap algorithm, O(n*n!)
 void permutations(int * a, int size, int n)
 {
+    /*
+    123
+    each iteration produces all permutation that end with current last element. 
+    */
     if (size == 1) 
     {
         printArr(a, n);
         return;
     }
 
+    // this loop runs n times and then n-1 times n times each time. 
     for (int i = 0; i < size; i++)
     {
         permutations(a, size-1, n);
