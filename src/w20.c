@@ -11,7 +11,7 @@
 #include <stdlib.h>
 //#include <string.h>
 
-void multiply(int n, int m);
+void dfs(int n, int m);
 void printMul(int n, int m);
 
 int main (int argc, char *argv[])
