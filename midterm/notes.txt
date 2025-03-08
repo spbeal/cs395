@@ -1,0 +1,6 @@
+Review the textbook
+
+Expect a problem like the chess 960 permutations but easier. 
+   (4*4)*(6)*(5 choose 2 (10))*1
+
+Questions 11 and 12 on A1 are more tough and are not expected to be memorized for the midterm. #4 in appendix A is helpful
