@@ -86,7 +86,6 @@ int main (int argc, char *argv[])
    {
       points[i].x = atoi(argv[i*2 + 1]);
       points[i].y = atoi(argv[i*2 + 2]); // not out of bounds because argc is n+1
-      // printf("%d %d ", points[i].x, points[i].y);
    }
    convex_hull(points, n);
 }

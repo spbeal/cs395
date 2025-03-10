@@ -1,30 +1,44 @@
 /*********************************************
  * Id: beal6782
  * 
- * Russian Peasant Multiplication
+ * DFS or BFS bipartite graph determinor
  * 
- * Implement an algorithm for russian peasant multiplcation
- * n/2 * 2m for even
- * n-1/2 * 2m + m for odd
  *********************************************/ 
 #include <stdio.h>
 #include <stdlib.h>
-//#include <string.h>
+#include <string.h>
 
-void dfs(int n, int m);
-void printMul(int n, int m);
+void engine( int x, int y, int n, char arr[])
+{
+
+}
 
 int main (int argc, char *argv[])
 {
-   if (argc < 3)
+   if (argc < 5)
    {
       printf("%s 1 2 3 4 5 6 7 8", argv[0]);
       exit(1);
    }
+   printf("\n");
+   for (int i = 3; i < argc; i++)
+   {
+      printf("%s ", argv[i]);
+   }
+   printf("\n");
 
+
+   const int n = (argc - 1 - 2);
+   char arr[n];
+   memset(arr, 0, n);
+   for (int i = 0; i < n; i++)
+   {
+      arr[i] = argv[i+3][0];
+      printf("%c ", arr[i]);
+   }
    int x = atoi(argv[1]);
    int y = atoi(argv[2]);
-   multiply(x,y);
+   engine(x,y,n,arr);
 }
 
 /*
