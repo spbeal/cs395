@@ -15,31 +15,30 @@ void engine( int x, int y, int n, char arr[])
 
 int main (int argc, char *argv[])
 {
-   if (argc < 5)
+   if (argc < 3)
    {
-      printf("%s 1 2 3 4 5 6 7 8", argv[0]);
+      printf("%s ./clique 6  1 0 0 1 1  1 1 0 0  1 1 1  0 1  1", argv[0]);
       exit(1);
    }
-   printf("\n");
-   for (int i = 3; i < argc; i++)
-   {
-      printf("%s ", argv[i]);
-   }
-   printf("\n");
 
+   const int n = atoi(argv[1]);
+   int arr[n][n];
 
-   const int n = (argc - 1 - 2);
-   char arr[n];
-   memset(arr, 0, n);
-   for (int i = 0; i < n; i++)
+   int k = 2; 
+   int j = 0;
+   for (int j = 0; j < n; j++)
    {
-      arr[i] = argv[i+3][0];
-      printf("%c ", arr[i]);
+      for (int space = 0; space < j+1; space++) { printf(" "); printf(" "); } 
+      for (int i = 1+j; (i < n && k < argc); i++)
+      {
+         arr[i][j] = atoi(argv[k++]);
+         // if (argv[k][0] == ' ' && argv[k+1] == ' ') j++;
+         printf("%d ", arr[i][j]);
+      }
+      printf("\n");
    }
-   int x = atoi(argv[1]);
-   int y = atoi(argv[2]);
-   engine(x,y,n,arr);
 }
+
 /*
 Running: ./a.out  6  1 0 1 0 0   1 0 1 0   0 0 1   1 0   1 2>&1
 Comparing result to: /y/shared/Engineering/cs-drbc/assignments/w20 6  1 0 1 0 0   1 0 1 0   0 0 1   1 0   1 2>&1
