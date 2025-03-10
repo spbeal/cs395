@@ -40,6 +40,28 @@ int main (int argc, char *argv[])
    int y = atoi(argv[2]);
    engine(x,y,n,arr);
 }
+/*
+Running: ./a.out  6  1 0 1 0 0   1 0 1 0   0 0 1   1 0   1 2>&1
+Comparing result to: /y/shared/Engineering/cs-drbc/assignments/w20 6  1 0 1 0 0   1 0 1 0   0 0 1   1 0   1 2>&1
+Expected
+0 1 0 1 0 0
+1 0 1 0 1 0
+0 1 0 0 0 1
+1 0 0 0 1 0
+0 1 0 1 0 1
+0 0 1 0 1 0
+Graph is Bipartite
+
+Got
+
+0 1 0 0 1 0 1 0 0 0 1 1 0 1
+0 1 0 0 1 0 1 0 0 0 1 1 0 1
+If there is a lot of output, you could narrow down the error by doing a diff:
+diff -y <(./a.out  6  1 0 1 0 0   1 0 1 0   0 0 1   1 0   1 2>&1) <(/y/shared/Engineering/cs-drbc/assignments/w20 6  1 0 1 0 0   1 0 1 0   0 0 1   1 0   1 2>&1)
+   or
+diff  <(./a.out  6  1 0 1 0 0   1 0 1 0   0 0 1   1 0   1 2>&1) <(/y/shared/Engineering/cs-drbc/assignments/w20 6  1 0 1 0 0   1 0 1 0   0 0 1   1 0   1 2>&1)
+*/
+
 
 /*
 BFS or DFS bipartite graph determinor.
