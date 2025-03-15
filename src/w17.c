@@ -39,20 +39,17 @@ void engine( int x, int y, char ** arr)
    // }
 
 board[0][0] = (arr[0][0] == 'X') ? 0 : (arr[0][0] == '1' ? 1 : 0);
-
 for (int j = 1; j < y; j++) {
-   if (arr[0][j] == 'X') {
-       board[0][j] = 0; // Block entire row path
-   } else {
+   if (arr[0][j] != 'X') {
        board[0][j] = (board[0][j - 1] == 0) ? 0 : board[0][j - 1] + (arr[0][j] == '1' ? 1 : 0);
    }
+   //board[0][j] = (arr[0][j] == 'X' || board[0][j - 1] == 0) ? 0 : board[0][j - 1] + (arr[0][j] == '1' ? 1 : 0);
 }
 for (int i = 1; i < x; i++) {
-    if (arr[i][0] == 'X') {
-        board[i][0] = 0; 
-    } else {
+    if (arr[i][0] != 'X') {
         board[i][0] = (board[i - 1][0] == 0) ? 1 : board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
     }
+   //board[i][0] = (arr[i][0] == 'X' || board[i - 1][0] == 0) ? 1 : board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
 }
 
 // Fill in the rest of the board
@@ -83,25 +80,6 @@ for (int i = 1; i < x; i++) {
        free(board[i]);
    }
    free(board);
-
-   /*
-   ./robotCoin 5 6 0 X 0 1 0 0 1 0 0 X 1 0 0 1 0 X 1 0 0 0 0 1 0 1 X X X 0 1 0
-
-   //Input: Matrix C[1..n, 1..m] whose elements are equal to 1 and 0
-   //for cells with and without a coin, respectively
-   //Output: Largest number of coins the robot can bring to cell (n, m)
-   RobotCoinCollection(C[1..n, 1..m])
-      F[1, 1]←C[1, 1]; 
-      for j ←2 to m do 
-         F[1, j]←F[1, j − 1]+ C[1, j]
-      for i ←2 to n do
-         F[i, 1]←F[i − 1, 1]+ C[i, 1]
-         for j ←2 to m do
-            F[i, j ]←max(F [i − 1, j], F[i, j − 1]) + C[i, j ]
-      return F[n, m]
-   */
-   // X is an inaccessible cell
-
 }
 
 int main (int argc, char *argv[])
