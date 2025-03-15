@@ -93,7 +93,6 @@ int main (int argc, char *argv[])
    // printf("\n");
 
 
-   const int n = (argc - 1 - 2);
    int x = atoi(argv[1]);
    int y = atoi(argv[2]);
 
