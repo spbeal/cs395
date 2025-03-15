@@ -21,11 +21,11 @@ void engine( int x, int y, char ** arr)
    }
 
    // board[0][0] = (arr[0][0] == 'X') ? 0 : (arr[0][0] == '1' ? 1 : 0);
-   for (int j = 1; j<y; j++)
-   {
-      if (arr[0][j] != 'X')
-         board[0][j] = board[0][j-1] + (arr[0][j] == '1' ? 1 : 0);
-   }
+   // for (int j = 1; j<y; j++)
+   // {
+   //    if (arr[0][j] != 'X')
+   //       board[0][j] = board[0][j-1] + (arr[0][j] == '1' ? 1 : 0);
+   // }
    // for (int i = 1; i<x; i++)
    // {
    //    if (arr[i][0] != 'X')
@@ -39,6 +39,14 @@ void engine( int x, int y, char ** arr)
    // }
 
 board[0][0] = (arr[0][0] == 'X') ? 0 : (arr[0][0] == '1' ? 1 : 0);
+
+for (int j = 1; j < y; j++) {
+   if (arr[0][j] == 'X') {
+       board[0][j] = 0; // Block entire row path
+   } else {
+       board[0][j] = (board[0][j - 1] == 0) ? 0 : board[0][j - 1] + (arr[0][j] == '1' ? 1 : 0);
+   }
+}
 for (int i = 1; i < x; i++) {
     if (arr[i][0] == 'X') {
         board[i][0] = 0; 
