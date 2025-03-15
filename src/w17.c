@@ -51,7 +51,7 @@ for (int i = 1; i < x; i++) {
     if (arr[i][0] == 'X') {
         board[i][0] = 0; 
     } else {
-        board[i][0] = (board[i - 1][0] == 0) ? 0 : board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
+        board[i][0] = (board[i - 1][0] == 0) ? 1 : board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
     }
 }
 
