@@ -20,67 +20,33 @@ void engine( int x, int y, char ** arr)
       memset(board[i], 0, y * sizeof(int));  // Initialize with 0
    }
 
-   // board[0][0] = (arr[0][0] == 'X') ? 0 : (arr[0][0] == '1' ? 1 : 0);
-   // for (int j = 1; j<y; j++)
-   // {
-   //    if (arr[0][j] != 'X')
-   //       board[0][j] = board[0][j-1] + (arr[0][j] == '1' ? 1 : 0);
-   // }
-   // for (int i = 1; i<x; i++)
-   // {
-   //    if (arr[i][0] != 'X')
-   //       board[i][0] = board[i-1][0]+ (arr[i][0] == '1' ? 1 : 0);
-   //    for (int j = 1; j < y; j++)
-   //    {
-   //       if (arr[i][j] != 'X')
-   //          board[i][j] = MAX(board[i-1][j], board[i][j-1] + (arr[i][j] == '1' ? 1 : 0));
-   //          // board[i][j] = MAX(board[i-1][j], board[i][j-1] + (arr[i][j] == '1' ? 1 : 0) );
-   //    }
-   // }
+    board[0][0] = (arr[0][0] == '1') ? 1 : 0;
 
-//board[0][0] = (arr[0][0] == 'X') ? 0 : (arr[0][0] == '1' ? 1 : 0);
-board[0][0] = (arr[0][0] == '1') ? 1 : 0;
-// board[0][1] = (arr[0][0] == 'X') ? 0 : (arr[0][1] == '1' ? 1 : 0);
-// board[1][0] = (arr[0][0] == 'X') ? 0 : (arr[1][0] == '1' ? 1 : 0);
-
-// for (int j = 1; j < y; j++) {
-//    if (arr[0][j] != 'X') {
-//        board[0][j] = (board[0][j - 1] == 0) ? 0 : board[0][j - 1] + (arr[0][j] == '1' ? 1 : 0);
-//    }
-//    //board[0][j] = (arr[0][j] == 'X' || board[0][j - 1] == 0) ? 0 : board[0][j - 1] + (arr[0][j] == '1' ? 1 : 0);
-// }
-// for (int i = 1; i < x; i++) {
-//     if (arr[i][0] != 'X') {
-//         board[i][0] = (board[i - 1][0] == 0) ? 1 : board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
-//     }
-//    //board[i][0] = (arr[i][0] == 'X' || board[i - 1][0] == 0) ? 1 : board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
-// }
-
-for (int j = 1; j < y; j++) {
-   if (arr[0][j] != 'X') {
-       board[0][j] = (board[0][j - 1] == 0) ? 0 : board[0][j - 1] + (arr[0][j] == '1' ? 1 : 0);
-   }
-}
-for (int i = 1; i < x; i++) {
-   if (arr[i][0] != 'X') {
-       board[i][0] = (board[i - 1][0] == 0) ? 1 : board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
-   }
-}
-
-// Fill in the rest of the board
-for (int i = 1; i < x; i++) {
     for (int j = 1; j < y; j++) {
-        if (arr[i][j] != 'X') {
-            int above = board[i - 1][j];
-            int left = board[i][j - 1];
+        if (arr[0][j] != 'X') {
+            board[0][j] = (board[0][j - 1] == 0) ? 0 : board[0][j - 1] + (arr[0][j] == '1' ? 1 : 0);
+        }
+    }
+    for (int i = 1; i < x; i++) {
+        if (arr[i][0] != 'X') {
+            board[i][0] = (board[i - 1][0] == 0) ? 1 : board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
+        }
+    }
 
-            // If both paths are zero this cell remains zero
-            if (above != 0 || left != 0) {
-                board[i][j] = MAX(above, left) + (arr[i][j] == '1' ? 1 : 0);
+    // Fill in the rest of the board
+    for (int i = 1; i < x; i++) {
+        for (int j = 1; j < y; j++) {
+            if (arr[i][j] != 'X') {
+                int above = board[i - 1][j];
+                int left = board[i][j - 1];
+
+                // If both paths are zero this cell remains zero
+                if (above != 0 || left != 0) {
+                    board[i][j] = MAX(above, left) + (arr[i][j] == '1' ? 1 : 0);
+                }
             }
         }
     }
-}
 
 
    printf("Coin Collecting Table:\n");
