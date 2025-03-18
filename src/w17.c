@@ -32,16 +32,32 @@ void engine( int x, int y, char ** arr)
             board[i][0] = (board[i - 1][0] == 0) ? 1 : board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
         }
     }
+    // for (int i = 1; i < x; i++) {
+    //     if (arr[i][0] != 'X' && board[i - 1][0] != 0) {
+    //         board[i][0] = board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
+    //     } else {
+    //         board[i][0] = 0;
+    //     }
+    // }
 
     // Fill in the rest of the board
     for (int i = 1; i < x; i++) {
         for (int j = 1; j < y; j++) {
-            if (arr[i][j] != 'X') {
-                int above = board[i - 1][j];
-                int left = board[i][j - 1];
+            // if (arr[i][j] != 'X') {
+            //     int above = board[i - 1][j];
+            //     int left = board[i][j - 1];
 
-                // If both paths are zero this cell remains zero
-                if (above != 0 || left != 0) {
+            //     // If both paths are zero this cell remains zero
+            //     if (above != 0 || left != 0) {
+            //         board[i][j] = MAX(above, left) + (arr[i][j] == '1' ? 1 : 0);
+            //     }
+            // }
+            if (arr[i][j] != 'X') {
+                int above = (i > 0 && board[i - 1][j] != 0) ? board[i - 1][j] : -1;
+                int left = (j > 0 && board[i][j - 1] != 0) ? board[i][j - 1] : -1;
+                if (above == -1 && left == -1) {
+                    board[i][j] = 0; // No valid path
+                } else {
                     board[i][j] = MAX(above, left) + (arr[i][j] == '1' ? 1 : 0);
                 }
             }
