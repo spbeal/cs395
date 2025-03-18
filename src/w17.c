@@ -14,11 +14,14 @@
 
 void engine( int x, int y, char ** arr)
 {
-   int **board = (int**)malloc(x * sizeof(int*));
-   for (int i = 0; i < x; i++) {
-      board[i] = (int*)malloc(y * sizeof(int));
-      memset(board[i], 0, y * sizeof(int));  // Initialize with 0
-   }
+    int **board = (int**)malloc(x * sizeof(int*));
+    if (!board) { perror("malloc failed"); exit(1); }
+
+    for (int i = 0; i < x; i++) {
+        board[i] = (int*)malloc(y * sizeof(int));
+        if (!board[i]) { perror("malloc failed"); exit(1); }
+        memset(board[i], 0, y * sizeof(int));  // Initialize with 0
+    }
 
     board[0][0] = (arr[0][0] == '1') ? 1 : 0;
 
@@ -29,35 +32,19 @@ void engine( int x, int y, char ** arr)
     }
     for (int i = 1; i < x; i++) {
         if (arr[i][0] != 'X') {
-            board[i][0] = (board[i - 1][0] == 0) ? 1 : board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
+            board[i][0] = (board[i - 1][0] == 0) ? 0 : board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
         }
     }
-    // for (int i = 1; i < x; i++) {
-    //     if (arr[i][0] != 'X' && board[i - 1][0] != 0) {
-    //         board[i][0] = board[i - 1][0] + (arr[i][0] == '1' ? 1 : 0);
-    //     } else {
-    //         board[i][0] = 0;
-    //     }
-    // }
 
     // Fill in the rest of the board
     for (int i = 1; i < x; i++) {
         for (int j = 1; j < y; j++) {
-            // if (arr[i][j] != 'X') {
-            //     int above = board[i - 1][j];
-            //     int left = board[i][j - 1];
-
-            //     // If both paths are zero this cell remains zero
-            //     if (above != 0 || left != 0) {
-            //         board[i][j] = MAX(above, left) + (arr[i][j] == '1' ? 1 : 0);
-            //     }
-            // }
             if (arr[i][j] != 'X') {
-                int above = (i > 0 && board[i - 1][j] != 0) ? board[i - 1][j] : -1;
-                int left = (j > 0 && board[i][j - 1] != 0) ? board[i][j - 1] : -1;
-                if (above == -1 && left == -1) {
-                    board[i][j] = 0; // No valid path
-                } else {
+                int above = board[i - 1][j];
+                int left = board[i][j - 1];
+
+                // If both paths are zero this cell remains zero
+                if (above != 0 || left != 0) {
                     board[i][j] = MAX(above, left) + (arr[i][j] == '1' ? 1 : 0);
                 }
             }
@@ -81,43 +68,59 @@ void engine( int x, int y, char ** arr)
 
 int main (int argc, char *argv[])
 {
-   if (argc < 5)
-   {
-      printf("%s 1 2 3 4 5 6 7 8", argv[0]);
-      exit(1);
-   }
-   // printf("\n");
-   // for (int i = 3; i < argc; i++)
-   // {
-   //    printf("%s ", argv[i]);
-   // }
-   // printf("\n");
+    if (argc < 3) {
+        printf("%s <columns> <rows> <cell values>...\n", argv[0]);
+        exit(1);
+    }
+//    printf("\n");
+//    for (int i = 3; i < argc; i++)
+//    {
+//       printf("%s ", argv[i]);
+//    }
+//    printf("\n");
 
+    int x = atoi(argv[1]);
+    int y = atoi(argv[2]);
 
-   int x = atoi(argv[1]);
-   int y = atoi(argv[2]);
+    if (x <= 0 || y <= 0) {
+        printf("Error: Invalid dimensions.\n");
+        exit(1);
+    }
 
-   char **arr = (char**)malloc(x * sizeof(char*));   
-   for (int i = 0; i < x; i++) {
+    char **arr = (char**)malloc(x * sizeof(char*)); 
+    if (!arr) { perror("malloc failed"); exit(1); }  
+    for (int i = 0; i < x; i++) {
       arr[i] = (char*)malloc(y * sizeof(char));
-  }
+      if (!arr[i]) { perror("malloc failed"); exit(1); }
+      memset(arr[i], 0, y * sizeof(char));
+    }
+    int k = 3;  
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            if (k < argc) {
+                arr[i][j] = argv[k++][0];
+            } else {
+                printf("Error: Insufficient arguments for board values.\n");
+                exit(1);
+            }
+        }
+    }
 
-  int k = 3;  // Start reading from the 3rd argument
-  for (int i = 0; i < x; i++) {
-      for (int j = 0; j < y; j++) {
-          arr[i][j] = argv[k++][0];  // (0, 1, X)
-      }
-  }
-
-  printf("Board Inputed:\n");
-  for (int i = 0; i < x; i++) {
-      for (int j = 0; j < y; j++) {
-          printf("%c\t", arr[i][j]);
-      }
-      printf("\n");
-  }
+    printf("Board Inputed:\n");
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            printf("%c\t", arr[i][j]);
+        }
+        printf("\n");
+    }
 
    engine(x,y,arr);
+   
+   for (int i = 0; i < x; i++)
+   {
+        free(arr[i]);
+   }
+   free(arr);
 }
 
 /*
