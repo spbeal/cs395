@@ -94,6 +94,8 @@ void engine(int x, int y, char ** arr)
            printf("%d\t", board[i][j]);
        printf("\n");
    }
+   printf("\n");
+
    printf("The optimal path with this board is: %d\n", board[x - 1][y - 1]);
 
    for (int i = 0; i < x; i++) {
