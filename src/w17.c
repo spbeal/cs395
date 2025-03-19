@@ -59,19 +59,27 @@ void engine(int x, int y, char ** arr)
     }
 
     // Fill in the rest of the board
+    int k = 1;
     for (int i = 1; i < x; i++) {
-        for (int j = 1; j < y; j++) {
+        for (int j = k; j < y; j++) {
+            int above = (board[i - 1][j]) == 'X' ? 0 : board[i-1][j];
+            int left = (board[i][j - 1]) == 'X' ? 0 : board[i][j-1];
             if (arr[i][j] != 'X') {
-                int above = board[i - 1][j];
-                int left = board[i][j - 1];
-
+                //above = board[i-1][j];
+                //left = board[i][j-1];
+                
                 // If both paths are zero this cell remains zero
                 //if (above != 0 || left != 0) {
-                board[i][j] = MAX(above, left) + (arr[i][j] == '1' ? 1 : 0);
+                    board[i][j] = MAX(above, left) + (arr[i][j] == '1' ? 1 : 0);
                 //}
             }
             else
             {
+                if (arr[i][j] == 'X') {
+                    //k++;
+                    //break;
+                }
+                // 
                 //break;
             }
         }
