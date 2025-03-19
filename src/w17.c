@@ -88,9 +88,8 @@ void engine(int x, int y, char ** arr)
 
    printf("Coin Collecting Table:\n");
    for (int i = 0; i < x; i++) {
-       printf("%d", board[i][0]);
-       for (int j = 1; j < y; j++) 
-           printf("\t%d", board[i][j]);
+       for (int j = 0; j < y; j++) 
+           printf("%d\t", board[i][j]);
        printf("\n");
    }
    printf("The optimal path with this board is: %d\n", board[x - 1][y - 1]);
