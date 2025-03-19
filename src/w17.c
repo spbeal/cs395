@@ -149,6 +149,7 @@ int main (int argc, char *argv[])
         }
         printf("\n");
     }
+    printf("\n");
 
    engine(x,y,arr);
    
