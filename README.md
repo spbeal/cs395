@@ -1,2 +1,2 @@
 # CS395 Spring 2025
-> Assignments w0-w21
+> Assignments 1-21
