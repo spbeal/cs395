@@ -26,19 +26,6 @@ void engine(int x, int y, char ** arr)
     board[0][0] = (arr[0][0] == '1') ? 1 : 0;
     board[1][1] = (arr[1][1] == '1') ? 1 : 0;
 
-    // board[0][1] = (arr[0][1] == '1') ? 1 : 0;
-    // board[1][0] = (arr[1][0] == '1') ? 1 : 0;
-    // board[0][2] = (arr[0][2] == '1') ? 1 : 0;
-    // board[2][0] = (arr[2][0] == '1') ? 1 : 0;
-
-    // for (int i = 0; i < x; i++)
-    // {
-    //     for (int j = 0; j<y; j++)
-    //     {
-    //         board[i][j] = (arr[i][j] == '1') ? 1 : 0;
-    //     }
-    // }
-
     for (int j = 1; j < y; j++) {
         if (arr[0][j] != 'X') {
             if (arr[0][j] == '1')
@@ -67,23 +54,19 @@ void engine(int x, int y, char ** arr)
             int above = (board[i - 1][j]) == 'X' ? 0 : board[i-1][j];
             int left = (board[i][j - 1]) == 'X' ? 0 : board[i][j-1];
             if (arr[i][j] != 'X') {
-                //above = board[i-1][j];
-                //left = board[i][j-1];
                 
                 // If both paths are zero this cell remains zero
                 if (above != 0 || left != 0) {
                     board[i][j] = MAX(above, left) + (arr[i][j] == '1' ? 1 : 0);
                 }
             }
-            else
-            {
-                if (arr[i][j] == 'X') {
-                    //k++;
-                    //break;
-                }
-                // 
-                //break;
-            }
+            // else
+            // {
+            //     // if (arr[i][j] == 'X') {
+            //     //     //k++;
+            //     //     //break;
+            //     // }
+            // }
         }
     }
 
