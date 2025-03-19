@@ -24,6 +24,8 @@ void engine(int x, int y, char ** arr)
     }
 
     board[0][0] = (arr[0][0] == '1') ? 1 : 0;
+    board[1][1] = (arr[1][1] == '1') ? 1 : 0;
+
     // board[0][1] = (arr[0][1] == '1') ? 1 : 0;
     // board[1][0] = (arr[1][0] == '1') ? 1 : 0;
     // board[0][2] = (arr[0][2] == '1') ? 1 : 0;
@@ -69,9 +71,9 @@ void engine(int x, int y, char ** arr)
                 //left = board[i][j-1];
                 
                 // If both paths are zero this cell remains zero
-                //if (above != 0 || left != 0) {
+                if (above != 0 || left != 0) {
                     board[i][j] = MAX(above, left) + (arr[i][j] == '1' ? 1 : 0);
-                //}
+                }
             }
             else
             {
