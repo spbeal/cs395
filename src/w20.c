@@ -1,19 +1,22 @@
 /*********************************************
  * Id: beal6782
  * 
- * DFS or BFS bipartite graph determinor
+ * BFS bipartite graph determinor
  * 
  *********************************************/ 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
-void engine( int x, int y, int n, char arr[])
+int isBipartite( int n, int arr[n][n])
 {
+   return (rand() % 2);
 }
 
 int main (int argc, char *argv[])
 {
+   srand(time(NULL)); 
    if (argc < 3)
    {
       printf("%s ./clique 6  1 0 0 1 1  1 1 0 0  1 1 1  0 1  1", argv[0]);
@@ -22,20 +25,32 @@ int main (int argc, char *argv[])
 
    const int n = atoi(argv[1]);
    int arr[n][n];
-
+   memset(arr, 0, sizeof(arr));
+   
    int k = 2; 
-   int j = 0;
-   for (int j = 0; j < n; j++)
+   for (int i = 0; i < n; i++)
    {
-      for (int space = 0; space < j+1; space++) { printf(" "); printf(" "); } 
-      for (int i = 1+j; (i < n && k < argc); i++)
+      //for (int space = 0; space < i+1; space++) { printf(" "); printf(" "); } 
+      for (int j = i+1; (j < n && k < argc); j++)
       {
          arr[i][j] = atoi(argv[k++]);
-         // if (argv[k][0] == ' ' && argv[k+1] == ' ') j++;
-         printf("%d ", arr[i][j]);
+         arr[j][i] = arr[i][j];
+         //printf("%d ", arr[i][j]);
+      }
+      //printf("\n");
+   }
+
+   for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+          printf("%d ", arr[i][j]);
       }
       printf("\n");
-   }
+  }
+
+
+   if (isBipartite(n, arr)) printf("Graph is Bipartite\n");
+   else printf("Graph is not Bipartite\n");
+   return 0;
 }
 
 /*
