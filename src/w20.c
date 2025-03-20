@@ -82,7 +82,7 @@ int main (int argc, char *argv[])
 
 
    if (isBipartite(n, arr)) printf("Graph is Bipartite\n");
-   else printf("Graph is not Bipartite\n");
+   else printf("Graph is NOT Bipartite\n");
    return 0;
 }
 
