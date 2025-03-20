@@ -7,16 +7,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
+//#include <time.h>
+//    return (rand() % 2);
+//    srand(time(NULL)); 
 
 int isBipartite( int n, int arr[n][n])
 {
-   return (rand() % 2);
+   int colors[n];
+   memset(colors, -1, sizeof(colors));
+
+   for (int i = 0; i < n; i++)
+   {
+      // Hasn't been visited
+      if (colors[i] == -1) 
+      {
+         int queue[n];
+         int front = 0, rear = 0;
+         queue[rear++] = i;
+         colors[i] = 0; // visited
+
+         while (front < rear)
+         {
+            int j = queue[front++];
+            for (int k = 0; k < n; k++)
+            {
+               if (arr[j][k]) 
+               {
+                  if (colors[k] == -1)
+                  {
+                     colors[k] = colors[j] ^ 1; // 1 - colors[j]
+                     queue[rear++] = k;
+                  }
+                  else if (colors[k] == colors[j])
+                     return 0;
+               }
+            }
+         }
+      }
+   }
+   return 1;
 }
 
 int main (int argc, char *argv[])
 {
-   srand(time(NULL)); 
    if (argc < 3)
    {
       printf("%s ./clique 6  1 0 0 1 1  1 1 0 0  1 1 1  0 1  1", argv[0]);
