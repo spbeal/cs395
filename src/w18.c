@@ -86,9 +86,10 @@ void find_largest_clique()
 /////////////////////////////////////////////////
 
 void build_adjacency_matrix(int values[n][n]) {
-   int index = 0;
-   for (int i = 0; i < n; i++) {
-       for (int j = i + 1; j < n; j++) {
+   for (int i = 0; i < n; i++) 
+   {
+       for (int j = i + 1; j < n; j++) 
+       {
          graph[i][j] = graph[j][i] = values[i][j];
        }
    }
