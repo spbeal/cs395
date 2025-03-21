@@ -3,20 +3,20 @@
  * 
  * BFS bipartite graph determinor
  * 
+ * Checks each vertex through BFS.
+ * If a vertex is uncolored, it starts a BFS from that vertex, coloring adjacent vertices.
+ * If any adjacent vertex has the same color, the graph is not bipartite.
  *********************************************/ 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <time.h>
-//    return (rand() % 2);
-//    srand(time(NULL)); 
 
 int isBipartite( int n, int arr[n][n])
 {
    int colors[n];
    memset(colors, -1, sizeof(colors));
 
-   for (int i = 0; i < n; i++)
+   for (int i = 0; i < n; i++) // half the graph arr[n][n]
    {
       // Hasn't been visited
       if (colors[i] == -1) 
