@@ -1,0 +1,18 @@
+0 -> 5 6
+1 -> 6 7
+2 -> 7 8
+3 -> 5
+4 -> 5
+Queue: 0 1 2 3 4
+	V0 
+	|  
+	U0 
+Queue: 1 2 3 4
+	V0 V1 
+	|  |  
+	U0 U1 
+Queue: 2 3 4
+Queue: 3 4 0 1
+Queue: 4 0 1
+Queue: 0 1
+Queue: 1
