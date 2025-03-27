@@ -6,13 +6,52 @@
 Queue: 0 1 2 3 4
 	V0 
 	|  
-	U0 
+	U5 
 Queue: 1 2 3 4
 	V0 V1 
 	|  |  
-	U0 U1 
+	U5 U6 
 Queue: 2 3 4
-Queue: 3 4 0 1
-Queue: 4 0 1
-Queue: 0 1
+	V0 V1 V2 
+	|  |  |  
+	U5 U6 U7 
+Queue: 3 4
+	V0 V1 V2 
+	|  |  |  
+	U5 U6 U7 
+Queue: 4 5
+	V0 V1 V2 
+	|  |  |  
+	U5 U6 U7 
+Queue: 5
+	V0 V1 V2 
+	|  |  |  
+	U5 U6 U7 
+Queue: 0
+	V0 V1 V2 
+	|  |  |  
+	U5 U6 U7 
+Queue: 6
+	V0 V1 V2 
+	|  |  |  
+	U5 U6 U7 
 Queue: 1
+	V0 V1 V2 
+	|  |  |  
+	U5 U6 U7 
+Queue: 7
+	V0 V1 V2 
+	|  |  |  
+	U5 U6 U7 
+Queue: 2
+	V0 V1 V2 
+	|  |  |  
+	U4 U4 U4 
+Queue: 3 4
+	V0 V1 V2 
+	|  |  |  
+	U4 U4 U4 
+Queue: 4
+	V0 V1 V2 
+	|  |  |  
+	U4 U4 U4 

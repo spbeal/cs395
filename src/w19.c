@@ -13,57 +13,56 @@
 
 int V, U, start, end;
 int G[MAX_BOARD][MAX_BOARD];
-int matchV[MAX_BOARD], matchU[MAX_BOARD];
+//int matchV[MAX_BOARD], matchU[MAX_BOARD];
+int M[MAX_BOARD][2];
 int labelV[MAX_BOARD], labelU[MAX_BOARD];
 int queue[MAX_BOARD * 2];
-
-int M[MAX_BOARD];
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
 // Print out the currenlty found matchings
-// void printM(int start, int end) {
-//    int i;
-//    for(i=start; i<end; i++)
-//    {
-//       printf("\tV%d", M[i][0]);
-//    }
-//    printf("\n");
-
-//    for(i=start; i<end; i++)
-//    {
-//       printf("\t|");
-//    }
-//    printf("\n");
-
-//    for(i=start; i<end; i++)
-//    {
-//       printf("\tU%d", M[i][1]);
-//    }
-//    printf("\n");
-// }
-void printM() {
-   printf("\t");
-   for (int u = 0; u < U; u++) {
-       if (matchU[u] != -1) {
-           printf("V%d ", matchU[u]);
-       }
+void printM(int start, int end) {
+   int i;
+   for(i=start; i<end; i++)
+   {
+      printf("\tV%d", M[i][0]);
    }
-   printf("\n\t");
-   for (int u = 0; u < U; u++) {
-       if (matchU[u] != -1) {
-           printf("|  ");
-       }
+   printf("\n");
+
+   for(i=start; i<end; i++)
+   {
+      printf("\t|");
    }
-   printf("\n\t");
-   for (int u = 0; u < U; u++) {
-       if (matchU[u] != -1) {
-           printf("U%d ", u);
-       }
+   printf("\n");
+
+   for(i=start; i<end; i++)
+   {
+      printf("\tU%d", M[i][1]);
    }
    printf("\n");
 }
+// void printM() {
+//    printf("\t");
+//    for (int u = 0; u < U; u++) {
+//        if (matchU[u] != -1) {
+//            printf("V%d ", matchU[u]);
+//        }
+//    }
+//    printf("\n\t");
+//    for (int u = 0; u < U; u++) {
+//        if (matchU[u] != -1) {
+//            printf("|  ");
+//        }
+//    }
+//    printf("\n\t");
+//    for (int u = 0; u < U; u++) {
+//        if (matchU[u] != -1) {
+//            printf("U%d ", u);
+//        }
+//    }
+//    printf("\n");
+// }
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
