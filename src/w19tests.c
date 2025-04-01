@@ -44,51 +44,40 @@ void printGraph() {
 void printM() {
    printf("\t");
    for (int i = 0; i < V; i++) {
-       if (M[i][0] != -1) {
-           printf("V%d ", i);
-       }
+      if (M[i][0] != -1) {
+         printf("V%d ", M[i][0]);
+      }
+      else
+      {
+        // printf("V%d ", M[i][0]+3); // Convert back to original U numbers
+      }
    }
    printf("\n\t");
    for (int i = 0; i < V; i++) {
        if (M[i][0] != -1) {
-           printf("|  ");
-       }
+         printf("|  ");
+      }
+      else
+      {
+         //printf("V%d ", M[i][0]); // Convert back to original U numbers
+      }
    }
    printf("\n\t");
    for (int i = 0; i < V; i++) {
-       if (M[i][0] != -1) {
-           printf("U%d ", M[i][1] + 5); // Convert back to original U numbers
+       if (M[i][0] != -1 || M[i][1] == -1) {
+            // if (M[i][1] == -1) printf("%d", M[i][1]);
+           if (M[i][0] != -1) {
+            printf("U%d ", M[i][0]+5);
+           }
+           else
+           {
+            printf("U%d ", M[i][1]+5); // Convert back to original U numbers
+
+           }
        }
    }
    printf("\n");
 }
-
-// void printM(int start, int end) {
-//    int i;
-//    for(i=0; i<end; i++)
-//    {
-//       if (M[i][0] != -1) {
-//       printf("\tV%d", i);
-//       }
-//    }
-//    printf("\n");
-
-//    for(i=0; i<end; i++)
-//    {
-//       if (M[i][0] != -1) {
-//       printf("\t|");
-//       }
-//    }
-//    printf("\n");
-
-//    for(i=0; i<end; i++)
-//    {
-//       if (M[i][0] != -1) {
-//       printf("\tU%d", M[i][1]+5);
-//       }
-//    }
-//    printf("\n");
-// }
 
 
 void MaximumBipartiteMatching() {
@@ -105,10 +94,17 @@ void MaximumBipartiteMatching() {
        for (int v = 0; v < V; v++) {
            if (M[v][0] == -1) {
                enqueue(v);
-               //queue[end++] = v;
                labelV[v] = -2; // Mark as free V
            }
        }
+       
+      //Initialize queue with free U vertices
+      // for (int u = 0; u < U; u++) {
+      //    if (M[u][0] == -1) {
+      //          enqueue(u);
+      //          labelV[u] = -2; // Mark as free U
+      //    }
+      // }
 
        while (start < end) {
            printQueue();
@@ -120,32 +116,31 @@ void MaximumBipartiteMatching() {
                        labelU[u] = w;
                        if (M[u][0] == -1) { // U is free
                            // Augment the path
+                           
                            int v = w;
                            while (v != -2) {
                               int prev_u = labelU[v];
                                if (M[v][0] != -1) {
-                                   M[M[v][0]][1] = -1; // Remove old match
-                                   // M[v][1] = -1;
+                                   //M[M[v][0]][1] = -1; // Remove old match
+                                   M[v][1] = -1;
                                }
                               M[v][0] = u;
                               M[u][1] = v;
-                              // v = labelV[prev_u];
-                              v = (prev_u != -1) ? labelV[prev_u] : -2;
+                              v = labelV[prev_u];
+                              // v = (prev_u != -1) ? labelV[prev_u] : -2;
                            }
                            // Reset and reinitialize
                            memset(labelV, -1, sizeof(labelV));
                            memset(labelU, -1, sizeof(labelU));
-                           // printM(start,end);
                            start = end = 0;
                            updated = 1;
-                           // printM();
                            break;
 
                        } else { // U is matched
-                           //if (M[u][1] != -1) {
+                           if (M[u][1] != -1) {
                               labelV[M[u][1]] = u;
-                              queue[end++] = M[u][1] + V; // Enqueue as U vertex
-                           //}
+                              enqueue(M[u][1]+V);
+                           }
                        }
                    }
                }
@@ -153,10 +148,8 @@ void MaximumBipartiteMatching() {
            } else { // Process U vertex (encoded as V + u)
                int u = w - V;
                labelV[M[u][1]] = u;
-               queue[end++] = M[u][1]; // Enqueue V vertex
+               enqueue(M[u][1]);
            }
-         // printM(start, end);
-         printM();
        }
    } while (updated);
 }
